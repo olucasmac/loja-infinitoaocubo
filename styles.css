@@ -1,0 +1,318 @@
+/* Estilo base para o corpo */
+body {
+    font-family: Roboto, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Menu Superior */
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 10%;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.menu ul li {
+    margin: 0 15px;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.menu ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Topbar */
+.topbar {
+    background-color: #ffcc00;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Conteúdo */
+
+#products-container {
+    max-width: 990px; /* Limita a largura máxima do container */
+    margin: 0 auto; /* Centraliza o container */
+    padding: 20px; /* Adiciona um espaçamento interno */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    padding-top: 15px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    border-radius: 5px 5px 0 0;
+    /* width: 100%; */
+    height: 300px;
+    object-fit: cover;
+}
+
+.card h3 {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.card p {
+    padding: 0 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.price {
+    font-size: 22px !important;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.card button {
+    background-color: #25d366;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0 0 5px 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #1ebe5b;
+}
+
+/* Tag de Frete Grátis */
+.freight-tag {
+    background-color: #ffcc00;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.logo-footer img {
+    max-height: 50px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+/* Estilo dos ícones de redes sociais */
+.social-icons {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ffcc00; /* Cor de destaque ao passar o mouse */
+}
+
+/* RESPONSIVIDADE */
+
+/* Ajustes para tablets (telas de 768px e acima) */
+@media screen and (max-width: 1024px) {
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu ul li {
+        margin: 10px 0;
+    }
+
+    .container {
+        justify-content: space-around;
+    }
+
+    .card {
+        width: 250px;
+    }
+}
+
+/* Ajustes para smartphones (telas de até 768px) */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 2% 2% !important;
+    }
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu ul li {
+        margin: 10px 0;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+
+    }
+
+    .card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .topbar {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .logo img {
+        max-height: 40px;
+    }
+
+    .footer-content p {
+        font-size: 14px;
+    }
+    .disclaimer {
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+}
+
+.whatsapp-icon {
+    width: 20px !important; /* Tamanho do ícone */
+    height: 20px !important;
+    vertical-align: middle; /* Alinhar com o texto */
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+}
+/* Estilo para o código do produto */
+.product-code {
+    font-size: 12px !important;
+    color: #666;
+    margin-top: -10px; /* Para aproximar do título */
+    margin-bottom: 10px;
+}
+.disclaimer {
+    margin-top: 20px !important;
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+    line-height: 1.5em;
+}
+.copyright {
+    font-size: 12px;
+    margin-top: 20px !important;
+}
+
+/* Estilo do alerta de cookies */
+.cookie-alert {
+    background-color: #ffcc00;
+    color: #333;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cookie-alert p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.cookie-alert a {
+    color: #333;
+    text-decoration: underline;
+}
+
+.cookie-alert button {
+    background-color: #333;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 15px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cookie-alert button:hover {
+    background-color: #484848;
+}
+
+/* Esconder o alerta de cookies */
+.cookie-alert.hidden {
+    opacity: 0;
+    pointer-events: none; /* Evitar cliques após o alerta ser oculto */
+    transition: opacity 0.5s ease; /* Suavização do desaparecimento */
+}
+
