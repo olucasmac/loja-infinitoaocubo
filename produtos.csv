@@ -1,17 +1,17 @@
-name,image,description,price,freeShipping,sold,code,category
-Spider-Man,815TEngwF7L._AC_SL1500_.jpg,Spider-Man - Edição Jogo do ano,"R$ 74,90",FALSE,FALSE,,Jogos para PS4
-Spider-Man: Miles Morales,61F8Iyxqf6L._AC_SL1000_.jpg,Spider-Man: Miles Morales,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-God of War,81h0oxLQQPL._AC_SL1500_.jpg,God of War,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-The Last of Us,71ekFvMw6rL._AC_SL1500_.jpg,The Last of Us REMASTERIZADO,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-The Last of Us Parte II,61OZeW+pPYL._AC_SL1000_.jpg,The Last of Us Parte II,"R$ 74,90",FALSE,FALSE,,Jogos para PS4
-Death Stranding,81ycgg1aviL._AC_SL1500_.jpg,Death Stranding,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-Horizon Zero Dawn,81jV6wUKyIL._AC_SL1500_.jpg,Horizon Zero Dawn - Complete Edition,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-Shadow of the Colossus,81vPLT9c55L._AC_SL1500_.jpg,Shadow of the Colossus,"R$ 69,90",FALSE,FALSE,,Jogos para PS4
-Jedi Fallen Order,61PAS17sL3L._AC_SL1000_.jpg,Jedi Fallen Order [LACRADO],"R$ 99,90",FALSE,FALSE,,Jogos para PS4
-Crash Bandcoot N'Sane Trilogy,91u+hPR8NTL._AC_SL1500_.jpg,Crash Bandcoot N'Sane Trilogy,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-Ratchet & Clank,81PrZ4ENoUL._AC_SL1500_.jpg,Ratchet & Clank,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-STAR WARS Squadrons,81XG1GjFEdL._AC_SL1500_.jpg,STAR WARS Squadrons,"R$ 49,90",FALSE,FALSE,,Jogos para PS4
-Uncharted: The Lost Legacy,71+15NSh+NL._AC_SL1500_.jpg,Uncharted: The Lost Legacy,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-Uncharted: The Thief's End,81ERgdB4SSL._AC_SL1500_.jpg,Uncharted: The Thief's End,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-Uncharted: The Nathan Drake Collection,813QeeXqZwL._AC_SL1500_.jpg,Uncharted: The Nathan Drake Collection,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
-God of War III,81TBqOBJatL._AC_SL1500_.jpg,God of War III REMASTERIZADO,"R$ 59,90",FALSE,FALSE,,Jogos para PS4
+name,image,description,price,freeShipping,sold,code,category,condition
+Spider-Man,815TEngwF7L._AC_SL1500_.jpg,Spider-Man - Edição Jogo do ano,"R$ 74,90",FALSE,FALSE,,Playstation 4,usado
+Spider-Man: Miles Morales,61F8Iyxqf6L._AC_SL1000_.jpg,Spider-Man: Miles Morales,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+God of War,81h0oxLQQPL._AC_SL1500_.jpg,God of War,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+The Last of Us,71ekFvMw6rL._AC_SL1500_.jpg,The Last of Us REMASTERIZADO,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+The Last of Us Parte II,61OZeW+pPYL._AC_SL1000_.jpg,The Last of Us Parte II,"R$ 74,90",FALSE,FALSE,,Playstation 4,usado
+Death Stranding,81ycgg1aviL._AC_SL1500_.jpg,Death Stranding,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+Horizon Zero Dawn,81jV6wUKyIL._AC_SL1500_.jpg,Horizon Zero Dawn - Complete Edition,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+Shadow of the Colossus,81vPLT9c55L._AC_SL1500_.jpg,Shadow of the Colossus,"R$ 69,90",FALSE,FALSE,,Playstation 4,usado
+Jedi Fallen Order,61PAS17sL3L._AC_SL1000_.jpg,Jedi Fallen Order [LACRADO],"R$ 99,90",FALSE,FALSE,,Playstation 4,novo
+Crash Bandcoot N'Sane Trilogy,91u+hPR8NTL._AC_SL1500_.jpg,Crash Bandcoot N'Sane Trilogy,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+Ratchet & Clank,81PrZ4ENoUL._AC_SL1500_.jpg,Ratchet & Clank,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+STAR WARS Squadrons,81XG1GjFEdL._AC_SL1500_.jpg,STAR WARS Squadrons,"R$ 49,90",FALSE,FALSE,,Playstation 4,usado
+Uncharted: The Lost Legacy,71+15NSh+NL._AC_SL1500_.jpg,Uncharted: The Lost Legacy,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+Uncharted: The Thief's End,81ERgdB4SSL._AC_SL1500_.jpg,Uncharted: The Thief's End,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+Uncharted: The Nathan Drake Collection,813QeeXqZwL._AC_SL1500_.jpg,Uncharted: The Nathan Drake Collection,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado
+God of War III,81TBqOBJatL._AC_SL1500_.jpg,God of War III REMASTERIZADO,"R$ 59,90",FALSE,FALSE,,Playstation 4,usado

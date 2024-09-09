@@ -392,10 +392,36 @@ button.disabled {
 
 .category-section h2 {
     margin-bottom: 0px;
+    display: none !important;
 }
 
 .item-count {
     font-size: 12px;
     margin-top: 10px;
     margin-left: 5px;
+    display: none !important;
+}
+
+/* Estilo para as tags de categoria e condição */
+.tag {
+    display: inline-block;
+    background-color: #333;
+    color: #f0f0f0;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.new {
+    background-color: #28a745; /* Verde para novo */
+    color: white;
+}
+
+.used {
+    background-color: #d2a100; /* Vermelho para usado */
+    color: white;
 }

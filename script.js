@@ -117,6 +117,14 @@ function generateProductCode(productName, index) {
     return `${code}-${index.toString().padStart(3, '0')}`;
 }
 
+// Mapeamento de cores para cada categoria
+const categoryColors = {
+    "Playstation 4": "#1e90ff",  // Azul para PS4
+    "Playstation 3": "#ff6347",  // Vermelho para PS3
+    "Playstation 5": "#333",  // Verde para PS2
+    "Outros": "#ffcc00" // Amarelo para outras categorias
+};
+
 // Função para criar os cards de produtos
 function createProductCards(products) {
     const imageDirectory = 'images/products/'; // Diretório padrão das imagens
@@ -128,7 +136,7 @@ function createProductCards(products) {
 
     // Organizar produtos por categoria
     products.forEach((product, index) => {
-        const category = product.category || 'Outros';
+        const category = product.categoryOFF || 'Outros'; // Gambiarra para remover o agrupamento de categorias!
 
         if (!categories[category]) {
             categories[category] = [];
@@ -143,14 +151,15 @@ function createProductCards(products) {
         const section = document.createElement('section');
         section.classList.add('category-section');
 
-        // Adicionar o título da categoria
+        // Adicionar o título da categoria com a cor correspondente
         const title = document.createElement('h2');
         title.textContent = category;
+        title.style.color = categoryColors[category] || '#000'; // Aplicar cor baseada na categoria
         section.appendChild(title);
 
         // Adicionar a quantidade de itens
         const itemCount = document.createElement('p');
-        itemCount.textContent = `Esta página possui ${categories[category].length} item(s)`;
+        itemCount.textContent = `${categories[category].length} item(s)`;
         itemCount.classList.add('item-count');
         section.appendChild(itemCount);
 
@@ -201,6 +210,38 @@ function createProductCards(products) {
                 card.appendChild(freightTag);
             }
 
+            // Adicionar as tags de categoria e condição (novo/usado)
+            const tagsContainer = document.createElement('div');
+
+            // Tag da categoria com cor baseada no mapeamento
+            const categoryTag = document.createElement('span');
+            categoryTag.classList.add('tag');
+            categoryTag.textContent = product.category;
+            // Se o produto foi vendido, deixar a tag em cinza
+            if (product.sold === 'true') {
+                categoryTag.style.backgroundColor = '#ccc'; // Cinza quando vendido
+                categoryTag.style.color = '#333';
+            } else {
+                categoryTag.style.backgroundColor = categoryColors[product.category] || '#ccc'; // Cor da categoria normal
+            }
+
+            tagsContainer.appendChild(categoryTag);
+
+            // Tag de condição (novo/usado)
+            const conditionTag = document.createElement('span');
+            conditionTag.classList.add('tag', product.condition === 'novo' ? 'new' : 'used');
+            conditionTag.textContent = product.condition === 'novo' ? 'Novo' : 'Usado';
+            // Se o produto foi vendido, deixar a tag de condição em cinza
+            if (product.sold === 'true') {
+                conditionTag.style.backgroundColor = '#ccc'; // Cinza quando vendido
+                conditionTag.style.color = '#333';
+            }
+
+            tagsContainer.appendChild(conditionTag);
+
+            // Adicionar o container das tags ao card
+            card.appendChild(tagsContainer);
+
             // Adicionar o botão de WhatsApp
             const button = document.createElement('button');
             const whatsappIcon = document.createElement('img');
@@ -248,6 +289,7 @@ function createProductCards(products) {
         document.getElementById('products-container').appendChild(section);
     });
 }
+
 
 // Função para gerar o link do WhatsApp
 function generateWhatsAppLink(productName, productCode) {
