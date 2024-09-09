@@ -19,9 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Número de itens por página
 const ITEMS_PER_PAGE = 9;
 let currentPage = 1;
+let allProducts = []; // Armazenar todos os produtos carregados
+let selectedCategory = "all";
+let selectedCondition = "all";
 
 // Função para carregar o CSV e converter para JSON
 async function fetchCSVAndConvertToJSON() {
@@ -34,20 +36,21 @@ async function fetchCSVAndConvertToJSON() {
         skipEmptyLines: true
     });
 
-    // Os dados convertidos em JSON estarão no parsedData.data
-    const products = parsedData.data;
+    // Retornar os dados convertidos
+    return parsedData.data;
+}
 
-    // Inicializar a paginação
+// Função para renderizar a página de produtos
+function renderPage(products, page) {
+    const productsContainer = document.getElementById('products-container');
+    productsContainer.innerHTML = ''; // Limpar os produtos anteriores
+
+    const startIndex = (page - 1) * ITEMS_PER_PAGE;
+    const endIndex = page * ITEMS_PER_PAGE;
+    const pageProducts = products.slice(startIndex, endIndex);
+
+    createProductCards(pageProducts);
     renderPagination(products);
-    renderPage(products, currentPage);
-
-    // Verificar o parâmetro na URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const isShareMode = urlParams.get('share') === 'true';
-
-    if (isShareMode) {
-        document.body.classList.add('share-mode'); // Adicionar uma classe para controlar o modo de compartilhamento
-    }
 }
 
 // Função para renderizar os botões de paginação com numeração
@@ -64,7 +67,8 @@ function renderPagination(products) {
     prevButton.onclick = () => {
         if (currentPage > 1) {
             currentPage--;
-            renderPage(products, currentPage);
+            filterProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Rolar para o topo da página
         }
     };
     paginationContainer.appendChild(prevButton);
@@ -78,7 +82,8 @@ function renderPagination(products) {
         }
         pageButton.onclick = () => {
             currentPage = i;
-            renderPage(products, currentPage);
+            filterProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Rolar para o topo da página
         };
         paginationContainer.appendChild(pageButton);
     }
@@ -90,26 +95,13 @@ function renderPagination(products) {
     nextButton.onclick = () => {
         if (currentPage < totalPages) {
             currentPage++;
-            renderPage(products, currentPage);
+            filterProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Rolar para o topo da página
         }
     };
     paginationContainer.appendChild(nextButton);
 }
 
-// Função para renderizar a página de produtos
-function renderPage(products, page) {
-    const productsContainer = document.getElementById('products-container');
-    productsContainer.innerHTML = ''; // Limpar os produtos anteriores
-
-    const startIndex = (page - 1) * ITEMS_PER_PAGE;
-    const endIndex = page * ITEMS_PER_PAGE;
-    const pageProducts = products.slice(startIndex, endIndex);
-
-    createProductCards(pageProducts);
-
-    // Atualizar a paginação
-    renderPagination(products);
-}
 
 // Função para gerar o código do produto automaticamente
 function generateProductCode(productName, index) {
@@ -119,9 +111,9 @@ function generateProductCode(productName, index) {
 
 // Mapeamento de cores para cada categoria
 const categoryColors = {
-    "Playstation 4": "#1e90ff",  // Azul para PS4
-    "Playstation 3": "#ff6347",  // Vermelho para PS3
-    "Playstation 5": "#333",  // Verde para PS2
+    "PS4": "#1e90ff",  // Azul para PS4
+    "PS3": "#ff6347",  // Vermelho para PS3
+    "PS5": "#333",  // Cinza para PS5
     "Outros": "#ffcc00" // Amarelo para outras categorias
 };
 
@@ -134,30 +126,24 @@ function createProductCards(products) {
 
     const categories = {}; // Organizar produtos por categoria
 
-    // Organizar produtos por categoria
     products.forEach((product, index) => {
-        const category = product.categoryOFF || 'Outros'; // Gambiarra para remover o agrupamento de categorias!
-
+        const category = product.category || 'Outros';
         if (!categories[category]) {
             categories[category] = [];
         }
         const productCode = generateProductCode(product.name, index);
-
         categories[category].push({ ...product, code: productCode });
     });
 
-    // Renderizar os produtos organizados por categoria
     Object.keys(categories).forEach(category => {
         const section = document.createElement('section');
         section.classList.add('category-section');
 
-        // Adicionar o título da categoria com a cor correspondente
         const title = document.createElement('h2');
         title.textContent = category;
         title.style.color = categoryColors[category] || '#000'; // Aplicar cor baseada na categoria
         section.appendChild(title);
 
-        // Adicionar a quantidade de itens
         const itemCount = document.createElement('p');
         itemCount.textContent = `${categories[category].length} item(s)`;
         itemCount.classList.add('item-count');
@@ -170,33 +156,28 @@ function createProductCards(products) {
             const card = document.createElement('div');
             card.classList.add('card');
 
-            // Adicionar a imagem do produto
             const img = document.createElement('img');
             img.src = `${imageDirectory}${product.image}`;
             card.appendChild(img);
 
-            // Se o produto foi vendido, adicionar a classe 'sold' e a tag 'INDISPONÍVEL'
+            // Verificar se o produto foi vendido
             if (product.sold === 'true') {
-                card.classList.add('sold'); // Adiciona a classe para aplicar o filtro de escala de cinza
-
+                card.classList.add('sold'); // Adicionar classe 'sold' para imagem em tons de cinza
                 const soldTag = document.createElement('div');
                 soldTag.classList.add('sold-tag');
                 soldTag.textContent = 'INDISPONÍVEL';
                 card.appendChild(soldTag);
             }
 
-            // Adicionar o título do produto
             const title = document.createElement('h3');
             title.textContent = product.name;
             card.appendChild(title);
 
-            // Adicionar o código do produto
             const codeElement = document.createElement('p');
             codeElement.classList.add('product-code');
             codeElement.textContent = `(ID: ${product.code})`;
             card.appendChild(codeElement);
 
-            // Adicionar o preço do produto
             const price = document.createElement('p');
             price.classList.add('price');
             price.textContent = product.price;
@@ -213,36 +194,30 @@ function createProductCards(products) {
             // Adicionar as tags de categoria e condição (novo/usado)
             const tagsContainer = document.createElement('div');
 
-            // Tag da categoria com cor baseada no mapeamento
+            // Tag da categoria
             const categoryTag = document.createElement('span');
             categoryTag.classList.add('tag');
             categoryTag.textContent = product.category;
-            // Se o produto foi vendido, deixar a tag em cinza
             if (product.sold === 'true') {
                 categoryTag.style.backgroundColor = '#ccc'; // Cinza quando vendido
                 categoryTag.style.color = '#333';
             } else {
                 categoryTag.style.backgroundColor = categoryColors[product.category] || '#ccc'; // Cor da categoria normal
             }
-
             tagsContainer.appendChild(categoryTag);
 
             // Tag de condição (novo/usado)
             const conditionTag = document.createElement('span');
             conditionTag.classList.add('tag', product.condition === 'novo' ? 'new' : 'used');
             conditionTag.textContent = product.condition === 'novo' ? 'Novo' : 'Usado';
-            // Se o produto foi vendido, deixar a tag de condição em cinza
             if (product.sold === 'true') {
                 conditionTag.style.backgroundColor = '#ccc'; // Cinza quando vendido
                 conditionTag.style.color = '#333';
             }
-
             tagsContainer.appendChild(conditionTag);
 
-            // Adicionar o container das tags ao card
             card.appendChild(tagsContainer);
 
-            // Adicionar o botão de WhatsApp
             const button = document.createElement('button');
             const whatsappIcon = document.createElement('img');
             whatsappIcon.src = 'icons/whatsapp.svg';
@@ -254,7 +229,7 @@ function createProductCards(products) {
             button.appendChild(buttonText);
 
             if (product.sold === 'true') {
-                button.classList.add('disabled');
+                button.classList.add('disabled'); // Desativar botão de WhatsApp para produtos vendidos
             } else {
                 button.onclick = () => {
                     window.open(generateWhatsAppLink(product.name, product.code), '_blank');
@@ -263,7 +238,6 @@ function createProductCards(products) {
 
             card.appendChild(button);
 
-            // Adicionar o botão de download se o modo de compartilhamento estiver ativo
             if (isShareMode) {
                 const downloadButton = document.createElement('button');
                 downloadButton.textContent = 'Baixar Imagem';
@@ -298,5 +272,47 @@ function generateWhatsAppLink(productName, productCode) {
     return `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
 }
 
-// Chamar a função para carregar o CSV e renderizar os produtos
-fetchCSVAndConvertToJSON();
+// Função para adicionar os event listeners aos botões de filtro
+function initializeFilters() {
+    const categoryButtons = document.querySelectorAll('#category-filters button');
+    const conditionButtons = document.querySelectorAll('#condition-filters button');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedCategory = button.getAttribute('data-category');
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterProducts(); // Atualizar os produtos com base no filtro
+        });
+    });
+
+    conditionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedCondition = button.getAttribute('data-condition');
+            conditionButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterProducts(); // Atualizar os produtos com base no filtro
+        });
+    });
+}
+
+// Função para filtrar os produtos com base na categoria e condição selecionadas
+function filterProducts() {
+    const filteredProducts = allProducts.filter(product => {
+        const matchCategory = selectedCategory === "all" || product.category === selectedCategory;
+        const matchCondition = selectedCondition === "all" || product.condition === selectedCondition;
+        return matchCategory && matchCondition;
+    });
+
+    renderPage(filteredProducts, currentPage); // Atualizar a página com os produtos filtrados
+}
+
+// Função principal para carregar o CSV e inicializar a página
+async function loadProducts() {
+    allProducts = await fetchCSVAndConvertToJSON(); // Carregar todos os produtos
+    renderPage(allProducts, currentPage); // Renderizar a primeira página
+    initializeFilters(); // Inicializar os filtros
+}
+
+// Chamar a função para carregar os produtos
+loadProducts();

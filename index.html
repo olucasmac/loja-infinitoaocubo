@@ -16,16 +16,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <!-- Menu Superior -->
-    <header class="header">
-        <div class="logo">
-            <img src="images/logo.png" alt="Logo da Loja">
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="https://api.whatsapp.com/send?phone=5531995724281&text=Olá!">Fale com a gente</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div style="background-color: #333;">
+        <header class="header">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo da Loja">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="https://api.whatsapp.com/send?phone=5531995724281&text=Olá!">Fale com a gente</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
 
     <!-- Topbar de Frete Grátis -->
     <div class="topbar">
@@ -35,6 +37,23 @@
     <!-- Conteúdo Principal: Vitrine de Produtos -->
     <!-- <h1 style="text-align: center; margin: 40px 20px 0px 20px;">Mídia física</h1> -->
     <!-- O container principal para os produtos -->
+    <div id="filters">
+        <div id="category-filters">
+            <p>Filtrar por Console: </p>
+            <button data-category="all" class="active">Todos</button>
+            <button data-category="PS4">PS4</button>
+            <button data-category="PS3">PS3</button>
+            <button data-category="PS5">PS5</button>
+        </div>
+    
+        <div id="condition-filters">
+            <p>Filtrar por Condição: </p>
+            <button data-condition="all"  class="active">Todas</button>
+            <button data-condition="novo">Novo</button>
+            <button data-condition="usado">Usado</button>
+        </div>
+    </div>
+
     <div id="products-container"></div>
     <div id="pagination-container"></div>
     
