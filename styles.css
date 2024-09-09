@@ -316,3 +316,33 @@ body {
     transition: opacity 0.5s ease; /* Suavização do desaparecimento */
 }
 
+/* Estilo da imagem em escala de cinza */
+.card.sold img {
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+/* Tag vermelha "VENDIDO" */
+.sold-tag {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+/* Estilo do botão desativado */
+button.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.download-btn {
+    border-radius: 5px !important;
+    margin-top: 5px;
+}

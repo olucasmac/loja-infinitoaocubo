@@ -32,6 +32,14 @@ async function fetchCSVAndConvertToJSON() {
 
     // Os dados convertidos em JSON estarão no parsedData.data
     createProductCards(parsedData.data);
+
+    // Verificar o parâmetro na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const isShareMode = urlParams.get('share') === 'true';
+
+    if (isShareMode) {
+        document.body.classList.add('share-mode'); // Adicionar uma classe para controlar o modo de compartilhamento
+    }
 }
 
 // Função para gerar o código do produto automaticamente
@@ -52,11 +60,12 @@ function createProductCards(products) {
     const categories = {}; // Objeto para agrupar produtos por categoria
     const imageDirectory = 'images/products/'; // Diretório padrão das imagens
 
+    // Verificar o parâmetro na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const isShareMode = urlParams.get('share') === 'true'; // Verificar se o parâmetro share=true está na URL
+
     // Organizar produtos por categoria
     products.forEach((product, index) => {
-        // Se o produto foi vendido, não adicionar à lista
-        if (product.sold === 'true') return;
-
         // Gerar um código único para o produto
         const productCode = generateProductCode(product.name, index);
 
@@ -102,6 +111,17 @@ function createProductCards(products) {
                 img.src = `${imageDirectory}${product.image}`; // Diretório + nome do arquivo
                 card.appendChild(img);
 
+                // Se o produto foi vendido, adicionar a classe 'sold' e a tag 'VENDIDO'
+                if (product.sold === 'true') {
+                    card.classList.add('sold'); // Adiciona a classe para aplicar a escala de cinza
+
+                    // Criar a tag vermelha 'VENDIDO'
+                    const soldTag = document.createElement('div');
+                    soldTag.classList.add('sold-tag');
+                    soldTag.textContent = 'INDISPONÍVEL';
+                    card.appendChild(soldTag);
+                }
+
                 // Adicionar o título do produto
                 const title = document.createElement('h3');
                 title.textContent = product.name;
@@ -134,8 +154,6 @@ function createProductCards(products) {
 
                 // Adicionar o botão de WhatsApp com ícone e link padronizado
                 const button = document.createElement('button');
-
-                // Criar o ícone do WhatsApp
                 const whatsappIcon = document.createElement('img');
                 whatsappIcon.src = 'icons/whatsapp.svg'; // Caminho para o ícone do WhatsApp
                 whatsappIcon.alt = 'WhatsApp';
@@ -146,11 +164,42 @@ function createProductCards(products) {
                 const buttonText = document.createTextNode(" Compre pelo WhatsApp");
                 button.appendChild(buttonText);
 
-                // Ação do botão para abrir o WhatsApp com o código do produto
-                button.onclick = () => {
-                    window.open(generateWhatsAppLink(product.name, product.code), '_blank');
-                };
+                // Se o produto estiver vendido, desativar o botão
+                if (product.sold === 'true') {
+                    button.classList.add('disabled'); // Adiciona a classe para desativar o botão
+                } else {
+                    // Ação do botão para abrir o WhatsApp com o código do produto
+                    button.onclick = () => {
+                        window.open(generateWhatsAppLink(product.name, product.code), '_blank');
+                    };
+                }
+                
                 card.appendChild(button);
+
+                // Adicionar o botão de download de imagem apenas se o parâmetro share=true estiver na URL
+                if (isShareMode) {
+                    const downloadButton = document.createElement('button');
+                    downloadButton.textContent = 'Baixar Imagem';
+                    downloadButton.classList.add('download-btn');
+                    card.appendChild(downloadButton);
+
+                    // Função para gerar e baixar a imagem
+                    downloadButton.onclick = function() {
+                        // Ocultar temporariamente o botão antes de capturar
+                        downloadButton.style.display = 'none';
+
+                        html2canvas(card).then(canvas => {
+                            // Criar o link para download da imagem
+                            const link = document.createElement('a');
+                            link.href = canvas.toDataURL('image/png');
+                            link.download = `card-${product.name}.png`; // Nome do arquivo de imagem
+                            link.click();
+
+                            // Reexibir o botão de download
+                            downloadButton.style.display = 'block';
+                        });
+                    };
+                }
 
                 // Adicionar o card ao container da categoria
                 container.appendChild(card);
