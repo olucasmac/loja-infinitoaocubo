@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 30;
 let currentPage = 1;
 let allProducts = []; // Armazenar todos os produtos carregados
 let selectedCategory = "all";
