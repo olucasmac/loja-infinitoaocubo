@@ -379,9 +379,9 @@ button.disabled {
 }
 
 #pagination-container button.active {
-    background-color: #0057E7;
+    background-color: #333;
     color: white;
-    border-color: #0057E7;
+    border-color: #333;
 }
 
 #pagination-container button:disabled {
