@@ -165,7 +165,7 @@ function createProductCards(products) {
                 card.classList.add('sold'); // Adicionar classe 'sold' para imagem em tons de cinza
                 const soldTag = document.createElement('div');
                 soldTag.classList.add('sold-tag');
-                soldTag.textContent = 'INDISPONÍVEL';
+                soldTag.textContent = 'VENDIDO';
                 card.appendChild(soldTag);
             }
 
