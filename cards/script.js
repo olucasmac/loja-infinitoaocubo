@@ -1,6 +1,6 @@
 // Função para carregar e parsear o CSV
 function loadCSV() {
-    Papa.parse('produtos.csv', {
+    Papa.parse('../produtos.csv', {
         download: true,
         header: true,
         complete: function(results) {
@@ -27,12 +27,12 @@ function generateCards(products) {
 
         // Adiciona a moldura como uma imagem diretamente no HTML
         const moldura = document.createElement('img');
-        moldura.src = 'images/i3_card_2.png'; // Certifique-se de usar a versão de alta qualidade da moldura
+        moldura.src = '../images/i3_card_2.png'; // Certifique-se de usar a versão de alta qualidade da moldura
         moldura.classList.add('moldura');
         card.appendChild(moldura);
 
         const img = document.createElement('img');
-        img.src = `images/products/${product.image}`;
+        img.src = `../images/products/${product.image}`;
         img.alt = product.name;
         img.classList.add('product-image');
 
