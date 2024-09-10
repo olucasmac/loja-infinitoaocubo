@@ -58,7 +58,10 @@ function generateCards(products) {
         const downloadBtn = document.createElement('button');
         downloadBtn.classList.add('download-btn');
         downloadBtn.textContent = 'Download';
-        downloadBtn.addEventListener('click', () => downloadCardAsImage(card, product.name));
+        downloadBtn.addEventListener('click', () => {
+            downloadCardAsImage(card, product.name);
+            copyTextToClipboard(generateProductText(product));
+        });
         cardWrapper.appendChild(downloadBtn);
 
         container.appendChild(cardWrapper);
@@ -77,6 +80,34 @@ function downloadCardAsImage(cardElement, productName) {
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
+}
+
+// Função para gerar o texto do produto no formato desejado
+function generateProductText(product) {
+    let text = `*${product.name}*\n\n`;
+    text += `Por: ${product.price} à vista;\n\n`;
+    text += `🛒 Compre agora: loja.infinitoaocubo.com.br\n\n`;
+    text += `> 🚚 ENVIAMOS PARA TODO O BRASIL 📦\n\n`;
+    text += `📱 Nosso canal de PROMOÇÕES >>> zap.infinitoaocubo.com.br`;
+
+    return text;
+}
+
+// Função para copiar texto para a área de transferência
+function copyTextToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+        console.log("Texto copiado para a área de transferência:", text); // Log de depuração
+    } catch (err) {
+        console.error("Erro ao copiar o texto para a área de transferência", err); // Log de erro
+    }
+
+    document.body.removeChild(textArea);
 }
 
 // Carregar o CSV ao carregar a página
