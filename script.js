@@ -216,21 +216,63 @@ function createProductCards(products) {
             }
             tagsContainer.appendChild(conditionTag);
 
+            // Verificar se o produto possui um link de afiliado e adicionar uma tag
+            if (product.affiliateLink) {
+                const affiliateTag = document.createElement('span');
+                affiliateTag.classList.add('tag');
+                affiliateTag.textContent = 'Afiliado';
+                affiliateTag.style.backgroundColor = '#ff6347'; // Cor diferenciada para o link de afiliado
+                affiliateTag.style.color = '#fff';
+                tagsContainer.appendChild(affiliateTag);
+            }
+
             card.appendChild(tagsContainer);
 
             const button = document.createElement('button');
-            const whatsappIcon = document.createElement('img');
-            whatsappIcon.src = 'icons/whatsapp.svg';
-            whatsappIcon.alt = 'WhatsApp';
-            whatsappIcon.classList.add('whatsapp-icon');
-            button.appendChild(whatsappIcon);
+            let buttonText;
+            let buttonColor = ''; // Variável para definir a cor do botão
 
-            const buttonText = document.createTextNode(" Compre pelo WhatsApp");
+            // Verificar se o link é da Amazon e adicionar o ícone da Amazon
+            if (product.affiliateLink && product.affiliateLink.includes('amazon.com')) {
+                buttonText = document.createTextNode(" Comprar na Amazon");
+
+                // Adicionar o ícone da Amazon
+                const amazonIcon = document.createElement('img');
+                amazonIcon.src = 'icons/amazon.svg'; // Supondo que o ícone da Amazon esteja no diretório 'icons'
+                amazonIcon.alt = 'Amazon';
+                amazonIcon.classList.add('affiliate-icon');
+                button.appendChild(amazonIcon); // Adicionar o ícone antes do texto
+                buttonColor = '#FF9900'; // Cor padrão do botão da Amazon
+            } else {
+                buttonText = document.createTextNode(product.affiliateLink ? "Compre no Afiliado" : " Compre pelo WhatsApp");
+
+                // Adicionar ícone do WhatsApp apenas para produtos que não possuem link de afiliado
+                if (!product.affiliateLink) {
+                    const whatsappIcon = document.createElement('img');
+                    whatsappIcon.src = 'icons/whatsapp.svg';
+                    whatsappIcon.alt = 'WhatsApp';
+                    whatsappIcon.classList.add('whatsapp-icon');
+                    button.appendChild(whatsappIcon); // Inserir o ícone antes do texto
+                }
+            }
+
             button.appendChild(buttonText);
+
+            // Aplicar cor se for da Amazon
+            if (buttonColor) {
+                button.style.backgroundColor = buttonColor;
+                button.style.color = 'white';
+            }
 
             if (product.sold === 'true') {
                 button.classList.add('disabled'); // Desativar botão de WhatsApp para produtos vendidos
+            } else if (product.affiliateLink) {
+                // Se houver um link de afiliado, redirecionar para o link de afiliado
+                button.onclick = () => {
+                    window.open(product.affiliateLink, '_blank');
+                };
             } else {
+                // Se não houver link de afiliado, abrir o WhatsApp
                 button.onclick = () => {
                     window.open(generateWhatsAppLink(product.name, product.code), '_blank');
                 };
@@ -263,6 +305,7 @@ function createProductCards(products) {
         document.getElementById('products-container').appendChild(section);
     });
 }
+
 
 
 // Função para gerar o link do WhatsApp

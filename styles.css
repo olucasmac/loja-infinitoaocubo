@@ -484,3 +484,10 @@ button.disabled {
         max-width: 300px; /* Limitar a largura máxima dos botões */
     }
 }
+/* Estilo para o ícone da Amazon */
+.affiliate-icon {
+    width: 20px !important;
+    height: 20px !important;
+    vertical-align: middle;
+    margin-right: 8px;
+}
