@@ -127,7 +127,7 @@ function createProductCards(products) {
     const categories = {}; // Organizar produtos por categoria
 
     products.forEach((product, index) => {
-        const category = product.category || 'Outros';
+        const category = product.categoryOFF || 'Outros';
         if (!categories[category]) {
             categories[category] = [];
         }
