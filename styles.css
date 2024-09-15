@@ -426,7 +426,7 @@ button.disabled {
 }
 
 .used {
-    background-color: #d2a100; /* Vermelho para usado */
+    background-color: red; /* Vermelho para usado */
     color: white;
 }
 

@@ -221,7 +221,7 @@ function createProductCards(products) {
                 const affiliateTag = document.createElement('span');
                 affiliateTag.classList.add('tag');
                 affiliateTag.textContent = 'Afiliado';
-                affiliateTag.style.backgroundColor = '#ff6347'; // Cor diferenciada para o link de afiliado
+                affiliateTag.style.backgroundColor = '#FF9900'; // Cor diferenciada para o link de afiliado
                 affiliateTag.style.color = '#fff';
                 tagsContainer.appendChild(affiliateTag);
             }
